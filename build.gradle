@@ -55,6 +55,9 @@ allprojects {
     repositories {
         google()
         mavenCentral() // Add here as well
+        maven {
+        url "https://maven.mozilla.org/maven2"
+        }
     }
 }
 
