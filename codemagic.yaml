@@ -5,10 +5,10 @@ workflows:
     max_build_duration: 90 # in minutes, adjust as needed
     environment:
       vars:
-        JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
+        JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
         api_level: 28
         build_tools_version: '30.0.3'
-        jdk: openjdk11
+        jdk: openjdk17
     scripts:
       - name: Install required SDK components
         script: |
@@ -32,10 +32,10 @@ workflows:
     max_build_duration: 90 # in minutes, adjust as needed
     environment:
       vars:
-        JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
+        JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
         api_level: 28
         build_tools_version: '30.0.3'
-        jdk: openjdk11
+        jdk: openjdk17
     scripts:
       - name: Install required SDK components
         script: |
