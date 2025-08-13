@@ -9,6 +9,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'org.mozilla.focus'
     compileSdkVersion 29
     buildToolsVersion '28.0.3'
     defaultConfig {
