@@ -6,8 +6,7 @@ apply plugin: 'jacoco'
 apply from: "$project.rootDir/tools/gradle/versionCode.gradle"
 
 android {
-    
-    namespace 'org.mozilla.focus'
+    namespace "org.mozilla.focus"     
     compileSdkVersion 33
     defaultConfig {
         targetSdkVersion 33         // match compileSdkVersion
@@ -38,6 +37,13 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    // any other plugins
+    }
+
     //dexOptions {
     //    preDexLibraries true
     //}
