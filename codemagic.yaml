@@ -15,14 +15,14 @@ workflows:
           echo "Installing required Android SDK components..."
           yes | sdkmanager "platforms;android-28" "platform-tools" "build-tools;30.0.3"
           sdkmanager --licenses || true
-      - name: Clean any previous build
-        script: ./gradlew clean
+      #- name: Clean any previous build
+      #  script: ./gradlew clean
       - name: Build 1/3
         script: ./gradlew assembleDebug
-      - name: Build 2/3
-        script: ./gradlew assembleDebug
-      - name: Build 3/3
-        script: ./gradlew assembleDebug
+      #- name: Build 2/3
+      #  script: ./gradlew assembleDebug
+      #- name: Build 3/3
+      #  script: ./gradlew assembleDebug
     artifacts:
       - app/build/outputs/apk/debug/*.apk
 
