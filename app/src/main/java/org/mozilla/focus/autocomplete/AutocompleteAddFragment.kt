@@ -26,6 +26,7 @@ import org.mozilla.focus.settings.BaseSettingsFragment
 import org.mozilla.focus.telemetry.TelemetryWrapper
 import org.mozilla.focus.utils.ViewUtils
 import kotlin.coroutines.CoroutineContext
+import android.widget.Toolbar
 
 /**
  * Fragment showing settings UI to add custom autocomplete domains.
