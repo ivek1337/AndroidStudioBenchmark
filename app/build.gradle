@@ -2,10 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: 'jacoco'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply from: "$project.rootDir/tools/gradle/versionCode.gradle"
 
 android {
+    buildFeatures {
+        viewBinding true
+    }
     compileSdkVersion 29
     buildToolsVersion '28.0.3'
     defaultConfig {
