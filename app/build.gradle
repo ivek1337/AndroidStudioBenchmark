@@ -124,6 +124,16 @@ android {
     }
 }
 
+android.applicationVariants.all { variant ->
+    def packageResTaskName = "package${variant.name.capitalize()}Resources"
+    def mergeResTaskName = "merge${variant.name.capitalize()}Resources"
+
+    tasks.matching { it.name == packageResTaskName || it.name == mergeResTaskName }.configureEach {
+        dependsOn tasks.named("buildBlocklists")
+    }
+}
+
+
 // Dynamically set versionCode for release and nightly builds accounting for ABI differences
 android.applicationVariants.all { variant ->
     def buildType = variant.buildType.name
