@@ -6,10 +6,9 @@ workflows:
     environment:
       vars:
         JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
-      android:
         api_level: 28
         build_tools_version: '30.0.3'
-      jdk: openjdk11
+        jdk: openjdk11
     scripts:
       - name: Install required SDK components
         script: |
@@ -34,10 +33,9 @@ workflows:
     environment:
       vars:
         JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
-      android:
         api_level: 28
         build_tools_version: '30.0.3'
-      jdk: openjdk11
+        jdk: openjdk11
     scripts:
       - name: Install required SDK components
         script: |
