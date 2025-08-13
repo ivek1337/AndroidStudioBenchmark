@@ -189,19 +189,17 @@ class SystemWebView(context: Context, attrs: AttributeSet) : NestedWebView(conte
     }
 
     override fun loadUrl(url: String?) {
-        // We need to check external URL handling here - shouldOverrideUrlLoading() is only
-        // called by webview when clicking on a link, and not when opening a new page for the
-        // first time using loadUrl().
-        @Suppress("DEPRECATION")
-        if (!client.shouldOverrideUrlLoading(this, url)) {
-            val additionalHeaders = HashMap<String, String>()
-            additionalHeaders["X-Requested-With"] = ""
-
-            super.loadUrl(url, additionalHeaders)
+        url?.let {
+            @Suppress("DEPRECATION")
+            if (!client.shouldOverrideUrlLoading(this, it)) {
+                val additionalHeaders = HashMap<String, String>()
+                additionalHeaders["X-Requested-With"] = ""
+                super.loadUrl(it, additionalHeaders)
+            }
+            client.notifyCurrentURL(it)
         }
-
-        client.notifyCurrentURL(url)
     }
+
 
     override fun exitFullscreen() {}
 
