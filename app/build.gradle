@@ -29,9 +29,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    dexOptions {
-        preDexLibraries true
-    }
+    //dexOptions {
+    //    preDexLibraries true
+    //}
 
     lintOptions {
         lintConfig file("lint.xml")
