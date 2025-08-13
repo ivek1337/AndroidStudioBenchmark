@@ -6,11 +6,11 @@ workflows:
     environment:
       vars:
         JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
-      android:
+      
         api_level: 28
         build_tools_version: '30.0.3'
-        ndk_version: ''
-      jdk: openjdk8
+        ndk_version: '21.4.7075529'
+        jdk: openjdk8
     scripts:
       - name: Install required SDK platforms and tools
         script: |
@@ -35,11 +35,10 @@ workflows:
     environment:
       vars:
         JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
-      android:
         api_level: 28
         build_tools_version: '30.0.3'
-        ndk_version: ''
-      jdk: openjdk8
+        ndk_version: '21.4.7075529'
+        jdk: openjdk8
     scripts:
       - name: Install required SDK platforms and tools
         script: |
