@@ -6,6 +6,8 @@ package org.mozilla.focus.activity
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.mozilla.focus.R
 import org.mozilla.focus.locale.LocaleAwareAppCompatActivity
