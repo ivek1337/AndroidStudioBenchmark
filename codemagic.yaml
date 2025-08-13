@@ -1,0 +1,58 @@
+workflows:
+  android_studio_benchmark_linux_x2:
+    name: Android Studio Benchmark on Linux_x2
+    instance_type: linux_x2
+    max_build_duration: 90 # in minutes, adjust as needed
+    environment:
+      vars:
+        JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+      android:
+        api_level: 28
+        build_tools_version: '30.0.3'
+        ndk_version: ''
+      jdk: openjdk8
+    scripts:
+      - name: Install required SDK platforms and tools
+        script: |
+          echo "Installing required Android SDK components..."
+          yes | sdkmanager "platforms;android-28" "platform-tools" "build-tools;30.0.3"
+          sdkmanager --licenses || true
+      - name: Clean any previous build
+        script: ./gradlew clean
+      - name: Build 1/3
+        script: ./gradlew assembleDebug
+      - name: Build 2/3
+        script: ./gradlew assembleDebug
+      - name: Build 3/3
+        script: ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/apk/debug/*.apk
+
+  android_studio_benchmark_linux_x4:
+    name: Android Studio Benchmark on Linux_x4
+    instance_type: linux_x4
+    max_build_duration: 90 # in minutes, adjust as needed
+    environment:
+      vars:
+        JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+      android:
+        api_level: 28
+        build_tools_version: '30.0.3'
+        ndk_version: ''
+      jdk: openjdk8
+    scripts:
+      - name: Install required SDK platforms and tools
+        script: |
+          echo "Installing required Android SDK components..."
+          yes | sdkmanager "platforms;android-28" "platform-tools" "build-tools;30.0.3"
+          sdkmanager --licenses || true
+      - name: Clean any previous build
+        script: ./gradlew clean
+      - name: Build 1/3
+        script: ./gradlew assembleDebug
+      - name: Build 2/3
+        script: ./gradlew assembleDebug
+      - name: Build 3/3
+        script: ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/apk/debug/*.apk
