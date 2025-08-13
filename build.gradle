@@ -37,11 +37,13 @@ plugins {
 
 detekt {
     version = "1.22.0"
-    profile("main") {
-        input = "$projectDir"
-        config = "$projectDir/quality/detekt.yml"
-        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
-        output = "$projectDir/app/build/reports/detekt"
+    input = files("$projectDir")
+    config = files("$projectDir/quality/detekt.yml")
+    filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    reports {
+        html.enabled = true
+        xml.enabled = false
+        txt.enabled = false
     }
 }
 
