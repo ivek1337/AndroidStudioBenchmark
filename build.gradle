@@ -36,10 +36,10 @@ plugins {
 }
 
 detekt {
-    version = "1.22.0"
-    input = files("$projectDir")
+    toolVersion = "1.22.0"  // or your plugin version
+    input = files("$projectDir/src/main/kotlin")
     config = files("$projectDir/quality/detekt.yml")
-    filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    baseline = file("$projectDir/detekt-baseline.xml") // optional
     reports {
         html.enabled = true
         xml.enabled = false
