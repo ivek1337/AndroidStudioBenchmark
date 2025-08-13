@@ -5,14 +5,13 @@ workflows:
     max_build_duration: 90 # in minutes, adjust as needed
     environment:
       vars:
-        JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
-      
+        JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
+      android:
         api_level: 28
         build_tools_version: '30.0.3'
-        ndk_version: '21.4.7075529'
-        jdk: openjdk8
+      jdk: openjdk11
     scripts:
-      - name: Install required SDK platforms and tools
+      - name: Install required SDK components
         script: |
           echo "Installing required Android SDK components..."
           yes | sdkmanager "platforms;android-28" "platform-tools" "build-tools;30.0.3"
@@ -34,13 +33,13 @@ workflows:
     max_build_duration: 90 # in minutes, adjust as needed
     environment:
       vars:
-        JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+        JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
+      android:
         api_level: 28
         build_tools_version: '30.0.3'
-        ndk_version: '21.4.7075529'
-        jdk: openjdk8
+      jdk: openjdk11
     scripts:
-      - name: Install required SDK platforms and tools
+      - name: Install required SDK components
         script: |
           echo "Installing required Android SDK components..."
           yes | sdkmanager "platforms;android-28" "platform-tools" "build-tools;30.0.3"
