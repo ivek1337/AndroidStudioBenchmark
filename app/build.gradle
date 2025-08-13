@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: "de.mannodermaus.android-junit5"
 apply plugin: 'jacoco'
 // apply plugin: 'kotlin-android-extensions' // deprecated, keep commented out
-
 apply from: "$project.rootDir/tools/gradle/versionCode.gradle"
 
 android {
@@ -15,7 +14,7 @@ android {
         applicationId "org.mozilla"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 11 // This is overwritten dynamically for release/nightly builds
+        versionCode 11 // Overwritten dynamically for release/nightly builds
         versionName "8.11.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -32,14 +31,13 @@ android {
 
     buildFeatures {
         viewBinding true
-        buildConfig true // Ensure BuildConfig is generated (required for AGP 8+)
+        buildConfig true // Ensure BuildConfig class generation (required in AGP 8+)
     }
 
     lintOptions {
         lintConfig file("lint.xml")
     }
 
-    // Build types for different configurations
     buildTypes {
         release {
             minifyEnabled true
@@ -124,17 +122,7 @@ android {
     }
 }
 
-android.applicationVariants.all { variant ->
-    def packageResTaskName = "package${variant.name.capitalize()}Resources"
-    def mergeResTaskName = "merge${variant.name.capitalize()}Resources"
-
-    tasks.matching { it.name == packageResTaskName || it.name == mergeResTaskName }.configureEach {
-        dependsOn tasks.named("buildBlocklists")
-    }
-}
-
-
-// Dynamically set versionCode for release and nightly builds accounting for ABI differences
+// Dynamically set versionCode accounting for ABI differences in release/nightly builds
 android.applicationVariants.all { variant ->
     def buildType = variant.buildType.name
     if (buildType == "release" || buildType == "nightly") {
@@ -143,7 +131,7 @@ android.applicationVariants.all { variant ->
             versionCode += 2
         } else if (variant.flavorName.contains("Aarch64")) {
             versionCode += 1
-        } // else arm uses base generated code
+        }
         variant.outputs.all { output ->
             setVersionCodeOverride(versionCode)
         }
@@ -166,6 +154,7 @@ task buildBlocklists(type: Copy) {
     rename { String filename ->
         filename.replaceAll("-", "_").toLowerCase()
     }
+    outputs.dir blockListOutputDir // Declare outputs explicitly
 }
 clean.doLast {
     delete fileTree(blockListOutputDir) {
@@ -174,9 +163,19 @@ clean.doLast {
 }
 // Ensure buildBlocklists runs before compile/generate config tasks
 tasks.whenTaskAdded { task ->
-    def name = task.name
-    if (name.contains("generate") && name.contains("Config")) {
+    if (task.name.contains("generate") && task.name.contains("Config")) {
         task.dependsOn buildBlocklists
+    }
+}
+
+// Declare dependencies on buildBlocklists for packaging, merging resource, and mapping source set path tasks to fix Gradle implicit dependency errors
+android.applicationVariants.all { variant ->
+    def packageResTaskName = "package${variant.name.capitalize()}Resources"
+    def mergeResTaskName = "merge${variant.name.capitalize()}Resources"
+    def mapSourceSetTaskName = "map${variant.name.capitalize()}SourceSetPaths"
+
+    tasks.matching { it.name == packageResTaskName || it.name == mergeResTaskName || it.name == mapSourceSetTaskName }.configureEach {
+        dependsOn tasks.named("buildBlocklists")
     }
 }
 
@@ -221,7 +220,7 @@ def getEnabledLocales() {
         }
     })
     def langs = potentialLanguageDirs.findAll {
-        return file(new File(it, "strings.xml")).exists()
+        file(new File(it, "strings.xml")).exists()
     }.collect {
         it.name.substring("values-".length())
     }.collect {
@@ -238,7 +237,6 @@ def getEnabledLocales() {
     langs.sort()
     return langs
 }
-
 def generatedLocaleListDir = 'src/main/java/org/mozilla/focus/generated'
 def generatedLocaleListFilename = 'LocaleList.java'
 task generateLocaleList {
@@ -263,7 +261,6 @@ tasks.whenTaskAdded { task ->
         task.dependsOn generateLocaleList
     }
 }
-
 clean.doLast {
     file(generatedLocaleListDir).deleteDir()
 }
