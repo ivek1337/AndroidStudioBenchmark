@@ -5,11 +5,7 @@ apply plugin: 'jacoco'
 //apply plugin: 'kotlin-android-extensions'
 apply from: "$project.rootDir/tools/gradle/versionCode.gradle"
 
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    // other plugins
-}
+
 
 
 android {
