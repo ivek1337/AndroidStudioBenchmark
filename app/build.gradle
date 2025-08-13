@@ -38,11 +38,7 @@ android {
         viewBinding true
     }
 
-    plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    // any other plugins
-    }
+
 
     //dexOptions {
     //    preDexLibraries true
