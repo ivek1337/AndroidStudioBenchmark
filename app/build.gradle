@@ -12,10 +12,15 @@ android {
     namespace "org.mozilla.focus"     
     compileSdkVersion 33
     defaultConfig {
-        targetSdkVersion 33         // match compileSdkVersion
-        // Also review minSdkVersion here if needed
+        applicationId "org.mozilla"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 11
+        versionName "8.11.3"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
-    buildToolsVersion '28.0.3'
+    buildToolsVersion '30.0.3'
     defaultConfig {
         applicationId "org.mozilla"
         minSdkVersion 21
