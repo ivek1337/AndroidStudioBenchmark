@@ -18,7 +18,7 @@ workflows:
       - name: Clean previous build
         script: ./gradlew clean
       - name: Build 1/3
-        script: ./gradlew assembleDebug #--stacktrace --info --debug --refresh-dependencies
+        script: ./gradlew assembleDebug --warning-mode all #--stacktrace --info --debug --refresh-dependencies
       #- name: Build 2/3
       #  script: ./gradlew assembleDebug
       #- name: Build 3/3
